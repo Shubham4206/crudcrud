@@ -61,19 +61,24 @@
                 Email: email,
                 TelePhone_No: tel
             };
+
+
+            // const x = async () => {
+                 axios.post("https://crudcrud.com/api/f6c23104c16d4df1bead5dce4f3949a7/appointmentData", obj)
+                 .then((response)=>{deleteUser(response.data,deleteBtn,item,li)})
+                 .catch((err) => console.log(err))
+                // return data1.data._id;
             
-         
-          const x=async()=>{const data1=await axios.post("https://crudcrud.com/api/ad4c260da2b44ae1b89526d137ecc8f8/appointmentData", obj)
-               
-                .catch((err) => console.log(err))
-                return data1.data._id;
-            }
             // localStorage.setItem(email, JSON.stringify(obj));
+        }
+        function deleteUser(user,deleteBtn,item,li){
             deleteBtn.onclick = () => {
-                axios.delete("https://crudcrud.com/api/ad4c260da2b44ae1b89526d137ecc8f8/appointmentData/data1",{x})
+                console.log(`${user._id}`)
+                 axios.delete(`https://crudcrud.com/api/f6c23104c16d4df1bead5dce4f3949a7/appointmentData/${user._id}`)
                 // localStorage.removeItem(obj.Email);
                 item.removeChild(li);
             };
+        }
             // editBtn.onclick = () => {
             //     // localStorage.removeItem(obj.Email);
             //     item.removeChild(li);
@@ -81,17 +86,17 @@
             //     document.getElementById('email').value = email;
             //     document.getElementById('tel').value = tel;
             // }
-        }
-      window.addEventListener("DOMContentLoaded",()=>{
-        axios.get("https://crudcrud.com/api/ad4c260da2b44ae1b89526d137ecc8f8/appointmentData")
+        
+        window.addEventListener("DOMContentLoaded", () => {
+            axios.get("https://crudcrud.com/api/f6c23104c16d4df1bead5dce4f3949a7/appointmentData")
                 .then((response) => {
                     // for(var i=0;i<response.data.length;i++){
-                        // document.body.innerHTML=document.body.innerHTML+response.data;
-                  console.log(response.data)
-                    
+                    // document.body.innerHTML=document.body.innerHTML+response.data;
+                    console.log(response.data)
+
                 })
                 .catch((err) => console.log(err))
-      })
+        })
 
     </script>
 </body>
