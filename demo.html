@@ -41,7 +41,7 @@
                 Name: name
             };
             try {
-                let response = await axios.post("https://crudcrud.com/api/4450ecad2e78432f894872f380fb49d8/appointmentData", obj)
+                let response = await axios.post("https://crudcrud.com/api/4869662a250b401293c4daed4f27392a/appointmentData", obj)
                 showProduct(response.data);
             }
             catch (err) {
@@ -49,16 +49,21 @@
             }
             priceAdded();
         }
-        window.addEventListener("DOMContentLoaded", () => {
-            axios.get("https://crudcrud.com/api/4450ecad2e78432f894872f380fb49d8/appointmentData")
-                .then((response) => {
-                    for (var i = 0; i < response.data.length; i++) {
-                        showProduct(response.data[i]);
-                    }
-                    priceAdded(response.data);
-                })
-                .catch((err) => console.log(err))
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+
+                let response2 = await axios.get("https://crudcrud.com/api/4869662a250b401293c4daed4f27392a/appointmentData")
+                let response = response2.data;
+                for (var i = 0; i < response.length; i++) {
+                    showProduct(response[i]);
+                }
+                priceAdded();
+            }
+            catch (err) {
+                console.log(err);
+            }
         })
+
         function showProduct(user) {
             let item = document.getElementById('item');
             let fin = user.Price + "-" + user.Name;
@@ -70,13 +75,13 @@
             li.appendChild(deleteBtn);
             item.appendChild(li);
             deleteBtn.onclick = async () => {
-                await axios.delete(`https://crudcrud.com/api/4450ecad2e78432f894872f380fb49d8/appointmentData/${user._id}`)
+                await axios.delete(`https://crudcrud.com/api/4869662a250b401293c4daed4f27392a/appointmentData/${user._id}`)
                 item.removeChild(li);
                 priceAdded();
             }
         }
         async function priceAdded() {
-            let responseget = await axios.get("https://crudcrud.com/api/4450ecad2e78432f894872f380fb49d8/appointmentData")
+            let responseget = await axios.get("https://crudcrud.com/api/4869662a250b401293c4daed4f27392a/appointmentData")
             let response = responseget.data;
             var total = 0;
             for (var i = 0; i < response.length; i++) {
